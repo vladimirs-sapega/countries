@@ -1,9 +1,11 @@
 package com.example.demo;
 
+import com.example.demo.dto.CountryInfo;
+import com.example.demo.exception.CountryInfoException;
+import com.example.demo.service.CountryInfoService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.junit.jupiter.api.function.Executable;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Spy;
@@ -84,7 +86,7 @@ class CountryInfoServiceTest {
         when(client.send(any(), any(HttpResponse.BodyHandlers.ofString().getClass()))).thenReturn(mockResponse);
         when(mockResponse.statusCode()).thenReturn(404);
 
-        RuntimeException exception = assertThrows(RuntimeException.class, () -> countryInfoService.getCountryInfo("LV"));
+        CountryInfoException exception = assertThrows(CountryInfoException.class, () -> countryInfoService.getCountryInfo("LV"));
         assertEquals("Something went wrong with response code: 404", exception.getMessage());
     }
 
@@ -92,7 +94,7 @@ class CountryInfoServiceTest {
     void getCountryInfo_Failed_Client() throws IOException, InterruptedException {
         when(client.send(any(), any(HttpResponse.BodyHandlers.ofString().getClass()))).thenThrow(new InterruptedException());
 
-        RuntimeException exception = assertThrows(RuntimeException.class, () -> countryInfoService.getCountryInfo("LV"));
+        CountryInfoException exception = assertThrows(CountryInfoException.class, () -> countryInfoService.getCountryInfo("LV"));
         assertEquals("Something went wrong ", exception.getMessage());
     }
 }

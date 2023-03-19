@@ -1,6 +1,8 @@
-package com.example.demo;
+package com.example.demo.controller;
 
 
+import com.example.demo.dto.CountryInfo;
+import com.example.demo.service.CountryInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;

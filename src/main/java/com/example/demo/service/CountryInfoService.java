@@ -1,6 +1,8 @@
-package com.example.demo;
+package com.example.demo.service;
 
 
+import com.example.demo.dto.CountryInfo;
+import com.example.demo.exception.CountryInfoException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -33,10 +35,10 @@ public class CountryInfoService {
             if (response.statusCode() == 200) {
                 return objectMapper.readValue(response.body(), CountryInfo.class);
             } else {
-                throw new RuntimeException("Something went wrong with response code: " + response.statusCode());
+                throw new CountryInfoException("Something went wrong with response code: " + response.statusCode());
             }
         } catch (URISyntaxException | InterruptedException | IOException e) {
-            throw new RuntimeException("Something went wrong ", e);
+            throw new CountryInfoException("Something went wrong ", e);
         }
     }
 }
