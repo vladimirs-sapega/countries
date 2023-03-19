@@ -1,5 +1,8 @@
 Application to retrieve country border
 
+Prerequisites: 
+-Java 11
+-Apache Maven 3.6.3
 
 How to start: 
 1. mvn clean install
